@@ -1,86 +1,70 @@
 const express = require("express");
-const session = require("express-session");
-const bcrypt = require("bcrypt");
-const sqlite3 = require("sqlite3").verbose();
+const fs = require("fs");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const app = express();
 const PORT = 3000;
 
-// Database
-const db = new sqlite3.Database("./users.db");
-
-// Create users table if not exists
-db.run(`CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE,
-    password TEXT,
-    isAdmin INTEGER DEFAULT 0
-)`);
-
 // Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(session({
-    secret: "RANDOM_SECRET_KEY",
-    resave: false,
-    saveUninitialized: true,
-}));
-
-// Serve static frontend
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// First-time setup: create a one-time admin account
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "TempPass123!";
+const usersFile = path.join(__dirname, "users.json");
 
-bcrypt.hash(ADMIN_PASS, 10, (err, hash) => {
-    db.get("SELECT * FROM users WHERE username = ?", [ADMIN_USER], (err, row) => {
-        if (!row) {
-            db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, ?)", [ADMIN_USER, hash, 1]);
-            console.log("✅ One-time admin account created:");
-            console.log(`Username: ${ADMIN_USER}`);
-            console.log(`Password: ${ADMIN_PASS}`);
-        }
-    });
-});
+// Load users
+let users = {};
+if (fs.existsSync(usersFile)) {
+  users = JSON.parse(fs.readFileSync(usersFile));
+} else {
+  // Default one-time admin login
+  users = {
+    admin: { password: "admin123", isAdmin: true, used: false }
+  };
+  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+}
 
-// Login route
+// Handle login
 app.post("/login", (req, res) => {
-    const { username, password } = req.body;
-    db.get("SELECT * FROM users WHERE username = ?", [username], (err, user) => {
-        if (!user) return res.json({ success: false, message: "Invalid credentials" });
+  const { username, password } = req.body;
 
-        bcrypt.compare(password, user.password, (err, result) => {
-            if (result) {
-                req.session.userId = user.id;
-                req.session.isAdmin = user.isAdmin;
-                return res.json({ success: true, isAdmin: user.isAdmin });
-            }
-            res.json({ success: false, message: "Invalid credentials" });
-        });
-    });
+  if (!users[username]) {
+    return res.json({ success: false, message: "User not found." });
+  }
+
+  const user = users[username];
+
+  if (user.password === password) {
+    // One-time admin login
+    if (user.isAdmin && user.used === false) {
+      user.used = true;
+      fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+      return res.json({ success: true, isAdmin: true, message: "Admin login successful." });
+    }
+
+    // Normal user login
+    if (!user.isAdmin) {
+      return res.json({ success: true, isAdmin: false, message: "Login successful." });
+    }
+
+    return res.json({ success: false, message: "Admin account already used." });
+  }
+
+  res.json({ success: false, message: "Incorrect password." });
 });
 
-// Create new account (only accessible to admins)
-app.post("/create-account", (req, res) => {
-    if (!req.session.isAdmin) return res.json({ success: false, message: "Not authorized" });
+// Create new user (only accessible for admins)
+app.post("/create-user", (req, res) => {
+  const { username, password } = req.body;
 
-    const { username, password } = req.body;
-    bcrypt.hash(password, 10, (err, hash) => {
-        db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, ?)", [username, hash, 0], function(err) {
-            if (err) return res.json({ success: false, message: "Username already exists" });
-            res.json({ success: true, message: "Account created successfully" });
-        });
-    });
+  if (users[username]) {
+    return res.json({ success: false, message: "User already exists." });
+  }
+
+  users[username] = { password, isAdmin: false };
+  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+
+  res.json({ success: true, message: "User created successfully!" });
 });
 
-// Logout
-app.get("/logout", (req, res) => {
-    req.session.destroy();
-    res.redirect("/login.html");
-});
-
-app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
