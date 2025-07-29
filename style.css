@@ -1,116 +1,33 @@
-:root {
-  --primary: #785fd3;
-  --bg-dark: #1c1c1c;
-  --text-light: #f4f4f4;
-  --panel: #292929;
-}
-
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-}
-
-header {
-  background: var(--primary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-nav a {
+  font-family: sans-serif;
+  background: #1e1e2f;
   color: #fff;
-  margin-left: 20px;
-  text-decoration: none;
+  padding: 2em;
 }
-
-.hero {
-  padding: 50px;
-  text-align: center;
-  background: var(--panel);
+h1, h3 {
+  color: #78dce8;
 }
-
-.hero h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.quick-links a {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 20px;
-  background: var(--primary);
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.form-section {
-  padding: 40px;
-  max-width: 600px;
-  margin: auto;
-  background: var(--panel);
-  border-radius: 10px;
-}
-
-form label {
-  margin-top: 15px;
+input, button {
   display: block;
-}
-
-input {
+  margin-top: 0.5em;
+  padding: 0.6em;
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  background: #2f2f2f;
-  border: 1px solid #444;
-  color: white;
-  border-radius: 5px;
-}
-
-button {
-  margin-top: 20px;
-  padding: 12px;
-  background: var(--primary);
+  max-width: 400px;
+  border-radius: 6px;
   border: none;
-  border-radius: 5px;
+}
+button {
+  background-color: #785fd3;
   color: white;
   font-weight: bold;
   cursor: pointer;
 }
-
 button:hover {
-  background: #674bb1;
+  background-color: #5744c7;
 }
-
-/* Login Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+.form-section {
+  margin-bottom: 2em;
 }
-
-.modal-content {
-  background: var(--panel);
-  padding: 30px;
-  margin: 10% auto;
-  width: 320px;
-  border-radius: 8px;
-  color: white;
-}
-
-.close {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
+p {
+  margin-top: 0.5em;
 }
