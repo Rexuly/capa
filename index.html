@@ -1,218 +1,851 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rip.CapTcha Key Redeem</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Custom scrollbar for dark theme */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0f172a;
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: #3b82f6;
-      border-radius: 10px;
-    }
-  </style>
-</head>
-<body class="bg-[#0f172a] min-h-screen flex flex-col">
-
-  <!-- Navbar -->
-  <nav class="w-full flex items-center justify-between bg-[#121d38] px-6 py-4 shadow-md select-none">
-    <div class="flex items-center space-x-2 text-[#3b82f6] font-semibold text-lg cursor-pointer select-text">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="5" x2="12" y2="19" />
-        <line x1="5" y1="12" x2="19" y2="12" />
-      </svg>
-      <span>Rip.CapTcha</span>
-    </div>
-    <div>
-      <button id="loginBtn" class="flex items-center text-white hover:text-[#3b82f6] transition select-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 21v-2a4 4 0 00-3-3.87" />
-          <path d="M12 7a4 4 0 100-8 4 4 0 000 8z" />
-          <path d="M4 19a9 9 0 0116 0" />
-        </svg>
-        Login
-      </button>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 space-y-10">
-
-    <!-- Login Form -->
-    <section id="loginSection" class="hidden max-w-xl w-full rounded-lg bg-[#1e293b] p-7 shadow-lg">
-      <h2 class="text-2xl font-bold text-[#3b82f6] text-center">Welcome Back</h2>
-      <p class="text-gray-300 text-sm text-center">Sign in to your account</p>
-      <form id="loginForm" class="flex flex-col space-y-4 mt-4">
-        <select class="bg-[#334155] text-white rounded-md p-3" id="accountType" required>
-          <option value="" disabled selected>Account Type</option>
-          <option value="admin">Tenant Admin</option>
-          <option value="user">User</option>
-        </select>
-        <input 
-          id="username" 
-          type="text" 
-          placeholder="USERNAME" 
-          required 
-          autocomplete="off"
-          class="bg-[#334155] placeholder-gray-400 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] transition"
-        />
-        <input 
-          id="password" 
-          type="password" 
-          placeholder="PASSWORD" 
-          required 
-          autocomplete="off"
-          class="bg-[#334155] placeholder-gray-400 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] transition"
-        />
-        <button 
-          type="submit" 
-          class="bg-[#3b82f6] text-white font-semibold rounded-md py-3 hover:bg-[#2563eb] transition"
-        >Sign In</button>
-      </form>
-      <p id="loginStatus" class="mt-3 text-center text-sm text-red-500 font-medium select-none"></p>
-    </section>
-
-    <!-- Card 1: Branding and info -->
-    <section class="max-w-xl w-full rounded-lg bg-[#1e293b] p-7 text-center shadow-lg" id="infoSection">
-      <div class="flex flex-col items-center space-y-2 select-text">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#3b82f6]" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 10l4.553-2.276A2 2 0 0020 6.382V4a2 2 0 00-2-2h-6a2 2 0 00-2 2v3" />
-          <path d="M9 13v4a2 2 0 002 2h4a2 2 0 002-2v-4" />
-          <circle cx="12" cy="12" r="10" stroke="#3b82f6" stroke-width="2" />
-        </svg>
-        <h1 class="text-2xl font-bold text-[#3b82f6]">Rip.CapTcha</h1>
-        <p class="text-gray-300 text-sm font-light">Advanced Key Management Platform</p>
-        <div class="flex justify-center space-x-8 mt-3 text-gray-400 text-xs font-light select-text">
-          <a href="https://ripcaptcha.net/store" class="hover:text-[#3b82f6] transition" target="_blank" rel="noopener noreferrer">ripcaptcha.net/store</a>
-          <a href="https://discord.gg/ripcaptcha" class="hover:text-[#3b82f6] transition" target="_blank" rel="noopener noreferrer">discord.gg/ripcaptcha</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Card 2: Redeem Key Form -->
-    <section class="max-w-xl w-full rounded-lg bg-[#1e293b] p-7 shadow-lg" id="redeemKeySection">
-      <form id="redeemForm" class="flex flex-col space-y-4">
-        <div class="flex items-center space-x-2 mb-2">
-          <span class="text-[#3b82f6] font-bold text-lg select-text">Redeem Your Key</span>
-          <div class="text-[#3b82f6] text-2xl font-bold select-text">°</div>
-        </div>
-        <input 
-          id="productKey" 
-          type="text" 
-          placeholder="ENTER YOUR PRODUCT KEY" 
-          required 
-          autocomplete="off"
-          class="bg-[#334155] placeholder-gray-400 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] transition"
-        />
-        <input 
-          id="authKey" 
-          type="text" 
-          placeholder="ENTER YOUR AUTHENTICATION KEY" 
-          required 
-          autocomplete="off"
-          class="bg-[#334155] placeholder-gray-400 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] transition"
-        />
-        <button 
-          type="submit" 
-          class="bg-[#3b82f6] text-white font-semibold rounded-md py-3 hover:bg-[#2563eb] transition"
-        >Submit</button>
-      </form>
-      <p id="statusMsg" class="mt-3 text-center text-sm text-red-500 font-medium select-none"></p>
-    </section>
-
-  </main>
-
-  <script>
-    // Discord webhook URL: you need to replace this with your actual webhook url
-    const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
-
-    // Reference status message paragraphs
-    const statusMsg = document.getElementById("statusMsg");
-    const loginStatus = document.getElementById("loginStatus");
-
-    // Redeem form submission handler
-    document.getElementById("redeemForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      statusMsg.textContent = "";
-      const productKey = document.getElementById("productKey").value.trim();
-      const authKey = document.getElementById("authKey").value.trim();
-
-      if (!productKey || !authKey) {
-        statusMsg.textContent = "Please fill out both keys.";
-        return;
-      }
-
-      // Prepare the content to send to Discord webhook
-      const content = {
-        username: "Rip.CapTcha Redeemer",
-        embeds: [
-          {
-            title: "Key Redeemed",
-            color: 3447003,
-            fields: [
-              { name: "Product Key", value: productKey, inline: true },
-              { name: "Authentication Key", value: authKey, inline: true }
-            ],
-            footer: {
-              text: "Rip.CapTcha - Advanced Key Management Platform"
-            },
-            timestamp: new Date().toISOString()
-          }
-        ],
-      };
-
-      try {
-        // Send data to webhook using fetch
-        const response = await fetch(DISCORD_WEBHOOK_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(content)
-        });
-
-        if (response.ok) {
-          statusMsg.classList.remove("text-red-500");
-          statusMsg.classList.add("text-green-400");
-          statusMsg.textContent = "Key redeemed successfully!";
-          e.target.reset();
-        } else {
-          throw new Error("Webhook request failed");
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quagen Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      } catch (error) {
-        statusMsg.classList.remove("text-green-400");
-        statusMsg.classList.add("text-red-500");
-        statusMsg.textContent = "Failed to submit keys. Try again later.";
-        console.error(error);
-      }
-    });
 
-    // Login button handler
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      const loginSection = document.getElementById("loginSection");
-      const infoSection = document.getElementById("infoSection");
-      const redeemKeySection = document.getElementById("redeemKeySection");
-      loginSection.classList.toggle("hidden");
-      infoSection.classList.toggle("hidden");
-      redeemKeySection.classList.toggle("hidden");
-    });
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
 
-    // Login form submission handler
-    document.getElementById("loginForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      loginStatus.textContent = "Logged in successfully!"; // Placeholder action
-      document.getElementById("loginSection").classList.add("hidden");
-      document.getElementById("infoSection").classList.remove("hidden");
-      document.getElementById("redeemKeySection").classList.remove("hidden");
-    });
-  </script>
+        .menu-container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 720px;
+            height: 480px;
+            background: #2a2a2a;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+        }
 
-</body>
-</html>
+        .sidebar {
+            width: 200px;
+            background: #1a1a1a;
+            padding: 15px 0;
+            border-right: 1px solid #333;
+        }
+
+        .logo {
+            padding: 0 15px 20px 15px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .logo p {
+            font-size: 10px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: #333;
+            border-left-color: #4a90e2;
+        }
+
+        .nav-item.active {
+            background: #333;
+            border-left-color: #4a90e2;
+        }
+
+        .nav-item::before {
+            content: '⚙';
+            margin-right: 10px;
+            font-size: 14px;
+            color: #4a90e2;
+        }
+
+        .nav-item:nth-child(2)::before { content: '👤'; }
+        .nav-item:nth-child(3)::before { content: '🖥'; }
+        .nav-item:nth-child(4)::before { content: '📍'; }
+        .nav-item:nth-child(5)::before { content: '🔫'; }
+        .nav-item:nth-child(6)::before { content: '🚗'; }
+        .nav-item:nth-child(7)::before { content: '😊'; }
+        .nav-item:nth-child(8)::before { content: '📅'; }
+        .nav-item:nth-child(9)::before { content: '⚙'; }
+
+        .nav-text {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background: #242424;
+            overflow-y: auto;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .content-panel {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #333;
+        }
+
+        .panel-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 10px;
+            color: #ccc;
+            margin-bottom: 4px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 6px 10px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 8px;
+            background: #4a90e2;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .btn:hover {
+            background: #357abd;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 8px 6px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            background: #4a90e2;
+            border-color: #4a90e2;
+        }
+
+        .server-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .server-btn {
+            padding: 12px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .server-btn:hover {
+            background: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .server-btn.active {
+            background: #4a90e2;
+            border-color: #4a90e2;
+        }
+
+        .console {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 280px;
+            height: 140px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            color: #0f0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .console-title {
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            min-width: 250px;
+            max-width: 320px;
+            background: #2a2a2a;
+            border: 1px solid #4a90e2;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #4a90e2;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .notification-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .notification-description {
+            font-size: 10px;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .notification-close {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 2px;
+            line-height: 1;
+        }
+
+        .notification-close:hover {
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slider-container {
+            margin-bottom: 12px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #ccc;
+            margin-bottom: 4px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 5px;
+            border-radius: 3px;
+            background: #333;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #4a90e2;
+            cursor: pointer;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #444;
+            border-radius: 3px;
+            background: transparent;
+            position: relative;
+        }
+
+        .checkbox.checked {
+            background: #4a90e2;
+            border-color: #4a90e2;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .checkbox-label {
+            font-size: 12px;
+            color: #ccc;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Quagen</h1>
+                <p>Made By @RXREESE</p>
+            </div>
+            
+            <div class="nav-item active" onclick="showSection('player')">
+                <span class="nav-text">Player</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('server')">
+                <span class="nav-text">Server</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('teleport')">
+                <span class="nav-text">Teleport</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('weapon')">
+                <span class="nav-text">Weapon</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('vehicle')">
+                <span class="nav-text">Vehicle</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('emotes')">
+                <span class="nav-text">Emotes</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('events')">
+                <span class="nav-text">Events</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('settings')">
+                <span class="nav-text">Settings</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Player Section -->
+            <div class="content-section active" id="player">
+                <h2 class="section-title">Select Player</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">Player ID</h3>
+                        <div class="input-group">
+                            <input type="text" class="input-field" id="playerId" placeholder="Enter Player ID...">
+                        </div>
+                        <button class="btn" onclick="selectPlayer()">Select Player</button>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Player Mods</h3>
+                        <div class="action-grid">
+                            <div class="action-btn" onclick="teleportToPlayer()">Teleport to Player</div>
+                            <div class="action-btn" onclick="burnPlayer()">Burn Player</div>
+                            <div class="action-btn" onclick="tazePlayer()">Taze Player</div>
+                            <div class="action-btn" onclick="killPlayer()">Kill Player</div>
+                            <div class="action-btn" onclick="explodePlayer()">Explode Player</div>
+                            <div class="action-btn" onclick="cagePlayer()">Cage Player</div>
+                            <div class="action-btn" onclick="glitchVehicle()">Glitch Vehicle</div>
+                            <div class="action-btn" onclick="attackPlayer()">Attack Player</div>
+                            <div class="action-btn" onclick="dropBannableWeapons()">Drop Bannable Weapons</div>
+                            <div class="action-btn" onclick="copyAppearance()">Copy Appearance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Server Section -->
+            <div class="content-section" id="server">
+                <h2 class="section-title">Server Destroyer</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">Server Actions</h3>
+                        <div class="server-actions">
+                            <div class="server-btn" onclick="killEveryone()">Kill Everyone</div>
+                            <div class="server-btn" onclick="playerCrasher()">(G) Player Crasher</div>
+                            <div class="server-btn" onclick="tugSpammer()">Tug Spammer</div>
+                            <div class="server-btn" onclick="explodeEveryone()">Explode Everyone</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Server Status</h3>
+                        <div class="input-group">
+                            <label class="input-label">Server Response Time</label>
+                            <input type="text" class="input-field" value="42ms" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Players Online</label>
+                            <input type="text" class="input-field" value="127/128" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Server State</label>
+                            <input type="text" class="input-field" value="Stable" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teleport Section -->
+            <div class="content-section" id="teleport">
+                <h2 class="section-title">Teleport Options</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">Quick Teleport</h3>
+                        <button class="btn" onclick="teleportToWaypoint()">Teleport to Waypoint</button>
+                        <button class="btn" onclick="teleportToPlayer()">Teleport to Player</button>
+                        <button class="btn btn-warning" onclick="teleportToCoords()">Custom Coordinates</button>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Coordinates</h3>
+                        <div class="input-group">
+                            <label class="input-label">X Coordinate</label>
+                            <input type="number" class="input-field" id="coordX" placeholder="0.0">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Y Coordinate</label>
+                            <input type="number" class="input-field" id="coordY" placeholder="0.0">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Z Coordinate</label>
+                            <input type="number" class="input-field" id="coordZ" placeholder="0.0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weapon Section -->
+            <div class="content-section" id="weapon">
+                <h2 class="section-title">Weapon Manager</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">Weapon Actions</h3>
+                        <button class="btn" onclick="giveAllWeapons()">Give All Weapons</button>
+                        <button class="btn btn-danger" onclick="removeAllWeapons()">Remove All Weapons</button>
+                        <button class="btn btn-warning" onclick="giveAmmo()">Give Ammo</button>
+                        <button class="btn btn-success" onclick="maxAmmo()">Max Ammo</button>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Weapon Options</h3>
+                        <div class="checkbox-container" onclick="toggleInfiniteAmmo()">
+                            <div class="checkbox" id="infiniteAmmo"></div>
+                            <div class="checkbox-label">Infinite Ammo</div>
+                        </div>
+                        <div class="checkbox-container" onclick="toggleNoReload()">
+                            <div class="checkbox" id="noReload"></div>
+                            <div class="checkbox-label">No Reload</div>
+                        </div>
+                        <div class="checkbox-container" onclick="toggleRapidFire()">
+                            <div class="checkbox" id="rapidFire"></div>
+                            <div class="checkbox-label">Rapid Fire</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle Section -->
+            <div class="content-section" id="vehicle">
+                <h2 class="section-title">Vehicle Manager</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">Vehicle Spawn</h3>
+                        <div class="input-group">
+                            <label class="input-label">Vehicle Model</label>
+                            <input type="text" class="input-field" id="vehicleModel" placeholder="adder">
+                        </div>
+                        <button class="btn" onclick="spawnVehicle()">Spawn Vehicle</button>
+                        <button class="btn btn-danger" onclick="deleteVehicle()">Delete Vehicle</button>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Vehicle Mods</h3>
+                        <div class="slider-container">
+                            <div class="slider-label">
+                                <span>Vehicle Speed</span>
+                                <span id="speedValue">100%</span>
+                            </div>
+                            <input type="range" class="slider" id="speedSlider" min="0" max="200" value="100" oninput="updateSpeed(this.value)">
+                        </div>
+                        <div class="checkbox-container" onclick="toggleGodMode()">
+                            <div class="checkbox" id="vehicleGod"></div>
+                            <div class="checkbox-label">Vehicle God Mode</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emotes Section -->
+            <div class="content-section" id="emotes">
+                <h2 class="section-title">Emotes & Animations</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">Popular Emotes</h3>
+                        <div class="action-grid">
+                            <div class="action-btn" onclick="playEmote('dance')">Dance</div>
+                            <div class="action-btn" onclick="playEmote('salute')">Salute</div>
+                            <div class="action-btn" onclick="playEmote('wave')">Wave</div>
+                            <div class="action-btn" onclick="playEmote('sit')">Sit</div>
+                            <div class="action-btn" onclick="playEmote('clap')">Clap</div>
+                            <div class="action-btn" onclick="playEmote('point')">Point</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Custom Animation</h3>
+                        <div class="input-group">
+                            <label class="input-label">Animation Dict</label>
+                            <input type="text" class="input-field" id="animDict" placeholder="anim@heists@heist_corona@team_idles@male_a">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Animation Name</label>
+                            <input type="text" class="input-field" id="animName" placeholder="idle">
+                        </div>
+                        <button class="btn" onclick="playCustomAnim()">Play Animation</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events Section -->
+            <div class="content-section" id="events">
+                <h2 class="section-title">Events Manager</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">Trigger Events</h3>
+                        <button class="btn" onclick="triggerEvent('hospital:heal')">Hospital Heal</button>
+                        <button class="btn" onclick="triggerEvent('esx:addMoney')">Add Money</button>
+                        <button class="btn" onclick="triggerEvent('weathersync:requestWeather')">Change Weather</button>
+                        <button class="btn btn-danger" onclick="triggerEvent('admin:kick')">Admin Kick</button>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Custom Event</h3>
+                        <div class="input-group">
+                            <label class="input-label">Event Name</label>
+                            <input type="text" class="input-field" id="customEvent" placeholder="custom:event">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Event Data</label>
+                            <input type="text" class="input-field" id="eventData" placeholder="{}">
+                        </div>
+                        <button class="btn" onclick="triggerCustomEvent()">Trigger Event</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="content-section" id="settings">
+                <h2 class="section-title">Menu Settings</h2>
+                <div class="content-grid">
+                    <div class="content-panel">
+                        <h3 class="panel-title">General Settings</h3>
+                        <div class="checkbox-container" onclick="toggleNotifications()">
+                            <div class="checkbox checked" id="notifications"></div>
+                            <div class="checkbox-label">Enable Notifications</div>
+                        </div>
+                        <div class="checkbox-container" onclick="toggleConsole()">
+                            <div class="checkbox checked" id="consoleToggle"></div>
+                            <div class="checkbox-label">Show Console</div>
+                        </div>
+                        <div class="checkbox-container" onclick="toggleSounds()">
+                            <div class="checkbox" id="sounds"></div>
+                            <div class="checkbox-label">Enable Sounds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-panel">
+                        <h3 class="panel-title">Menu Actions</h3>
+                        <button class="btn btn-warning" onclick="saveSettings()">Save Settings</button>
+                        <button class="btn" onclick="resetSettings()">Reset to Default</button>
+                        <button class="btn btn-danger" onclick="closeMenu()">Close Menu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="console" id="console">
+        <div class="console-title">Quagen Console Output:</div>
+        <div id="consoleOutput"></div>
+    </div>
+
+    <script>
+        let currentSection = 'player';
+        let selectedPlayerId = null;
+        let settings = {
+            notifications: true,
+            console: true,
+            sounds: false
+        };
+
+        function log(message) {
+            if (!settings.console) return;
+            
+            const output = document.getElementById('consoleOutput');
+            const timestamp = new Date().toLocaleTimeString();
+            output.innerHTML += `[${timestamp}] ${message}<br>`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Update nav
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+            
+            currentSection = sectionName;
+            log(`Switched to ${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)} section`);
+        }
+
+        function showNotification(title, description) {
+            if (!settings.notifications) return;
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            notification.innerHTML = `
+                <button class="notification-close" onclick="closeNotification(this)">×</button>
+                <div class="notification-title">${title}</div>
+                <div class="notification-description">${description}</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    closeNotification(notification.querySelector('.notification-close'));
+                }
+            }, 4000);
+        }
+
+        function closeNotification(button) {
+            const notification = button.parentNode;
+            notification.style.animation = 'slideIn 0.3s ease-out reverse';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+
+        // Player Functions
+        function selectPlayer() {
+            const playerId = document.getElementById('playerId').value;
+            if (!playerId) {
+                showNotification('Error', 'Please enter a valid Player ID');
+                return;
+            }
+            selectedPlayerId = playerId;
+            showNotification('Player Selected', `Selected player ID: ${playerId}`);
+            log(`Selected player: ${playerId}`);
+        }
+
+        function teleportToPlayer() {
+            if (!selectedPlayerId) {
+                showNotification('Error', 'Please select a player first');
+                return;
+            }
+            log(`TriggerEvent("admin:teleportToPlayer", ${selectedPlayerId})`);
+            showNotification('Teleport', `Teleporting to player ${selectedPlayerId}`);
+        }
+
+        function burnPlayer() {
+            if (!selectedPlayerId) {
+                showNotification('Error', 'Please select a player first');
+                return;
+            }
+            log(`TriggerEvent("admin:burnPlayer", ${selectedPlayerId})`);
+            showNotification('Action', `Burning player ${selectedPlayerId}`);
+        }
+
+        function tazePlayer() {
+            if (!selectedPlayerId) {
+                showNotification('Error', 'Please select a player first');
+                return;
+            }
+            log(`TriggerEvent("admin:tazePlayer", ${selectedPlayerId})`);
+            showNotification('Action', `Tazing player ${selectedPlayerId}`);
+        }
+
+        function killPlayer() {
+            if (!selectedPlayerId) {
+                showNotification('Error', 'Please select a player first');
+                return;
+            }
+            log(`TriggerEvent("admin:killPlayer", ${selectedPlayerId})`);
+            showNotification('Action', `Killing player ${selectedPlayerId}`);
+        }
+
+        function explodePlayer() {
+            if (!selectedPlayerId) {
+                showNotification('Error', 'Please select a player first');
+                return;
+            }
+            log(`TriggerEvent("admin:explodePlayer", ${selectedPlayerId})`);
+            showNotification('Action', `Exploding player ${selectedPlayerId}`);
+        }
+
+        function cagePlayer() {
+            if (!selectedPlayerId) {
+                showNotification('Error', 'Please select a player first');
+                return;
+            }
+            log(`TriggerEvent("admin:cagePlayer", ${selectedPlayerId})`);
+            showNotification('Action', `Caging player ${selectedPlayerId}`);
+        }
+
+        function glitchVehicle() {
+            if (!selectedPlayerId) {
