@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Rip.CapTcha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
@@ -30,12 +31,10 @@
     <section class="form-section">
       <h3>Redeem Your Access Key</h3>
       <form>
-        <label for="product-key">Enter your Product Key</label>
+        <label for="product-key">Product Key</label>
         <input type="text" id="product-key" placeholder="XXXX-XXXX-XXXX">
-
-        <label for="auth-key">Enter your Authentication Key</label>
+        <label for="auth-key">Authentication Key</label>
         <input type="text" id="auth-key" placeholder="•••••••••••">
-
         <button type="submit">Redeem</button>
       </form>
     </section>
@@ -47,17 +46,11 @@
       <span class="close">&times;</span>
       <h2>Admin Login</h2>
       <form id="loginForm">
-        <label for="username">Username</label>
-        <input type="text" id="username" required>
-
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
-
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
         <button type="submit">Login</button>
         <p id="loginFeedback"></p>
       </form>
-      <hr>
-      <p>Need an account? Registration opens soon.</p>
     </div>
   </div>
 </body>
