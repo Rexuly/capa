@@ -3,43 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Macho Key Portal</title>
+  <title>Dashboard</title>
   <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
-    <h1>Macho Portal</h1>
+    <h1>Admin Panel</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Settings</a>
+      <a href="#">Logout</a>
+    </nav>
   </header>
 
   <main>
     <section class="form-section">
-      <h3>Redeem Key</h3>
-      <form id="redeemForm">
-        <label for="auth-key">Authentication Key</label>
-        <input type="text" id="auth-key" placeholder="•••••••••" required>
-        <button type="submit">Redeem</button>
-        <p id="redeemStatus"></p>
-      </form>
-    </section>
+      <h2>Login</h2>
+      <form>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" />
 
-    <section class="form-section">
-      <h3>Migrate Your Key</h3>
-      <form id="migrateForm">
-        <label for="macho-key">Macho Key</label>
-        <input type="text" id="macho-key" placeholder="MACHO-XXXX-XXXX" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
 
-        <label for="auth-key-migrate">Authentication Key</label>
-        <input type="text" id="auth-key-migrate" placeholder="•••••••••" required>
-
-        <label for="discord-user">Discord Username</label>
-        <input type="text" id="discord-user" placeholder="e.g. RX#1234" required>
-
-        <button type="submit">Migrate Key</button>
-        <p id="migrateStatus"></p>
+        <button type="submit">Sign In</button>
+        <p>Don't have an account? <a href="#">Register</a></p>
       </form>
     </section>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
