@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Rip.CapTcha</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
@@ -12,7 +13,7 @@
       <a href="#">Home</a>
       <a href="#">Store</a>
       <a href="#">Discord</a>
-      <a href="#" class="login-btn">Login</a>
+      <a href="#" class="login-btn" onclick="openLogin()">Login</a>
     </nav>
   </header>
 
@@ -39,5 +40,25 @@
       </form>
     </section>
   </main>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Admin Login</h2>
+      <form id="loginForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+
+        <button type="submit">Login</button>
+        <p id="loginFeedback"></p>
+      </form>
+      <hr>
+      <p>Need an account? Registration opens soon.</p>
+    </div>
+  </div>
 </body>
 </html>
