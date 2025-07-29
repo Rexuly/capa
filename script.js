@@ -20,15 +20,14 @@ loginForm.addEventListener('submit', function(e) {
   const user = document.getElementById('username').value;
   const pass = document.getElementById('password').value;
 
-  // Only RX can log in
   if (user === "RX" && pass === "temporaryAccess123") {
-    feedback.textContent = "Login successful. Welcome RX.";
+    feedback.textContent = "Welcome RX.";
     feedback.style.color = "lightgreen";
     setTimeout(() => {
-      loginModal.style.display = 'none';
-    }, 2000);
+      window.location.href = "admin.html";
+    }, 1000);
   } else {
-    feedback.textContent = "Access denied. This login is restricted.";
+    feedback.textContent = "Access restricted.";
     feedback.style.color = "red";
   }
 });
