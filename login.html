@@ -38,22 +38,20 @@
         });
 
         const result = await res.json();
+        console.log("Login response:", result); // 🛠 Helpful debug log
 
         if (result.success) {
           document.getElementById("loginMsg").innerText = "✅ " + result.message;
-          
-          // Delay a bit so user sees message
+
           setTimeout(() => {
-            if (result.isAdmin) {
-              window.open("/create-account.html", "_blank"); // Opens in new tab
-            } else {
-              window.open("/dashboard.html", "_blank"); // Normal user dashboard
-            }
+            // Redirect in same tab for smoother UX
+            window.location.href = result.isAdmin ? "/create-account.html" : "/dashboard.html";
           }, 800);
         } else {
           document.getElementById("loginMsg").innerText = "❌ " + result.message;
         }
       } catch (err) {
+        console.error("Login error:", err);
         document.getElementById("loginMsg").innerText = "⚠️ Server not responding.";
       }
     });
