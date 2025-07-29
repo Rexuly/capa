@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rip.CapTcha - Admin Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Rip.CapTcha - Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
-  <div class="bg-gray-800 p-10 rounded-2xl shadow-lg w-full max-w-md">
-    <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Welcome Back</h2>
-    <form id="loginForm" class="space-y-4">
-      <input type="text" name="username" placeholder="Username"
-        class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600">
-      <input type="password" name="password" placeholder="Password"
-        class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600">
-      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg">Sign In</button>
+<body>
+  <div class="login-container">
+    <h2>Welcome Back</h2>
+    <p>Sign in to your Rip.CapTcha account</p>
+
+    <form id="loginForm">
+      <label>Username</label>
+      <input type="text" name="username" required>
+
+      <label>Password</label>
+      <input type="password" name="password" required>
+
+      <button type="submit">Sign In</button>
     </form>
-    <p id="loginMsg" class="text-center mt-4 text-gray-400"></p>
+
+    <p id="loginMsg"></p>
   </div>
 
   <script>
@@ -25,18 +30,25 @@
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
 
-      const res = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
+      try {
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
 
-      const result = await res.json();
-      if (result.success) {
-        if (result.isAdmin) window.location.href = "/create-account.html";
-        else window.location.href = "/dashboard.html";
-      } else {
-        document.getElementById("loginMsg").innerText = "❌ " + result.message;
+        const result = await res.json();
+        if (result.success) {
+          if (result.isAdmin) {
+            window.location.href = "/create-account.html";
+          } else {
+            window.location.href = "/dashboard.html";
+          }
+        } else {
+          document.getElementById("loginMsg").innerText = "❌ " + result.message;
+        }
+      } catch (err) {
+        document.getElementById("loginMsg").innerText = "⚠️ Server not responding.";
       }
     });
   </script>
