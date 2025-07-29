@@ -38,12 +38,18 @@
         });
 
         const result = await res.json();
+
         if (result.success) {
-          if (result.isAdmin) {
-            window.location.href = "/create-account.html";
-          } else {
-            window.location.href = "/dashboard.html";
-          }
+          document.getElementById("loginMsg").innerText = "✅ " + result.message;
+          
+          // Delay a bit so user sees message
+          setTimeout(() => {
+            if (result.isAdmin) {
+              window.open("/create-account.html", "_blank"); // Opens in new tab
+            } else {
+              window.open("/dashboard.html", "_blank"); // Normal user dashboard
+            }
+          }, 800);
         } else {
           document.getElementById("loginMsg").innerText = "❌ " + result.message;
         }
