@@ -3,22 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <title>Lua File Host</title>
-  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e2f;
+      color: #f8f8f2;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #50fa7b;
+    }
+    .upload-section {
+      margin-bottom: 2rem;
+    }
+    input[type="file"] {
+      padding: 0.5rem;
+      background-color: #282a36;
+      color: #f8f8f2;
+      border: 1px solid #444;
+      border-radius: 5px;
+    }
+    pre {
+      background-color: #282a36;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .download-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #6272a4;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Download My Lua Script</h1>
-  <a href="scripts/myscript.lua" download>📥 Download Lua File</a>
+  <h1>🌀 Lua File Host</h1>
 
-  <h2>Preview:</h2>
-  <pre><code class="language-lua">
-// Lua code will be shown here
--- Example Lua snippet
-function greet(name)
-  print("Hello, " .. name)
-end
-  </code></pre>
+  <div class="upload-section">
+    <label for="luaFile">Upload a Lua file:</label><br><br>
+    <input type="file" id="luaFile" accept=".lua">
+  </div>
+
+  <h2>📄 File Preview:</h2>
+  <pre><code id="luaPreview" class="language-lua">-- Your Lua code will appear here</code></pre>
+
+  <a id="downloadLink" class="download-btn" href="#" download="uploaded.lua" style="display:none;">Download Uploaded File</a>
 
   <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-lua.min.js"></script>
+  <script>
+    const fileInput = document.getElementById('luaFile');
+    const preview = document.getElementById('luaPreview');
+    const downloadLink = document.getElementById('downloadLink');
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file && file.name.endsWith('.lua')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.textContent = e.target.result;
+          Prism.highlightElement(preview);
+
+          // Create downloadable link
+          const blob = new Blob([e.target.result], { type: 'text/plain' });
+          downloadLink.href = URL.createObjectURL(blob);
+          downloadLink.style.display = 'inline-block';
+        };
+        reader.readAsText(file);
+      } else {
+        preview.textContent = '-- Please upload a valid .lua file';
+        downloadLink.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
