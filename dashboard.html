@@ -2,138 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Risk.lua Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
-      color: white;
-      display: flex;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: 240px;
-      background-color: #1e293b;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .sidebar h1 {
-      font-size: 24px;
-      margin-bottom: 30px;
-    }
-
-    .nav-item {
-      padding: 10px 0;
-      color: #cbd5e1;
-      cursor: pointer;
-    }
-
-    .nav-item.active {
-      background-color: #3b82f6;
-      color: white;
-      padding-left: 10px;
-      border-left: 4px solid white;
-    }
-
-    .dark-toggle {
-      margin-top: 40px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .toggle-circle {
-      width: 20px;
-      height: 20px;
-      background-color: #0f172a;
-      border-radius: 50%;
-    }
-
-    /* Main Content */
-    .main {
-      flex: 1;
-      padding: 30px;
-    }
-
-    .main h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .cards {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background-color: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      flex: 1;
-    }
-
-    .card h3 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .card p {
-      margin: 5px 0 0;
-      font-size: 14px;
-      color: #94a3b8;
-    }
-
-    .panels {
-      display: flex;
-      gap: 20px;
-    }
-
-    .panel {
-      background-color: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      flex: 1;
-    }
-
-    .panel h4 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .log-entry, .key-entry {
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #cbd5e1;
-    }
-
-    .timestamp {
-      color: #38bdf8;
-      font-size: 12px;
-    }
-
-    .user {
-      color: #f87171;
-    }
-  </style>
+  <title>Dashboard Overview</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="sidebar">
     <div>
       <h1>Risk.lua</h1>
-      <div class="nav-item active">Overview</div>
-      <div class="nav-item">Key Management</div>
-      <div class="nav-item">Logs</div>
-      <div class="nav-item">User Analytics</div>
-      <div class="nav-item">Raw Hosting</div>
+      <a href="index.html" class="nav-item active">Overview</a>
+      <a href="key-management.html" class="nav-item">Key Management</a>
+      <a href="logs.html" class="nav-item">Logs</a>
+      <a href="user-analytics.html" class="nav-item">User Analytics</a>
+      <a href="raw-hosting.html" class="nav-item">Raw Hosting</a>
     </div>
     <div class="dark-toggle">
       Dark Mode <div class="toggle-circle"></div>
@@ -143,39 +23,20 @@
   <div class="main">
     <h2>Dashboard Overview</h2>
     <div class="cards">
-      <div class="card">
-        <h3>Used Keys</h3>
-        <p>2 used keys</p>
-      </div>
-      <div class="card">
-        <h3>Server Connections</h3>
-        <p>no connections yet</p>
-      </div>
-      <div class="card">
-        <h3>Blocked Users</h3>
-        <p>no users blocked</p>
-      </div>
-      <div class="card">
-        <h3>Suspicious Activity</h3>
-        <p>no alerts</p>
-      </div>
+      <div class="card"><h3>Used Keys</h3><p>2 used keys</p></div>
+      <div class="card"><h3>Server Connections</h3><p>no connections yet</p></div>
+      <div class="card"><h3>Blocked Users</h3><p>no users blocked</p></div>
+      <div class="card"><h3>Suspicious Activity</h3><p>no alerts</p></div>
     </div>
-
     <div class="panels">
       <div class="panel">
         <h4>Recent Key Activations</h4>
-        <div class="key-entry">
-          123456789012 <span class="timestamp">8:05:04 PM</span> <span class="user">Unknown User</span>
-        </div>
-        <div class="key-entry">
-          RISKLUA-RFB0HLY <span class="timestamp">7:54:21 PM</span> <span class="user">sneegsn</span>
-        </div>
+        <div class="key-entry">123456789012 <span class="timestamp">8:05:04 PM</span> <span class="user">Unknown User</span></div>
+        <div class="key-entry">RISKLUA-RFB0HLY <span class="timestamp">7:54:21 PM</span> <span class="user">sneegsn</span></div>
       </div>
       <div class="panel">
         <h4>Recent Logs</h4>
-        <div class="log-entry">
-          Login - risk Admin login <span class="timestamp">Auth 6:00</span>
-        </div>
+        <div class="log-entry">Login - risk Admin login <span class="timestamp">Auth 6:00</span></div>
       </div>
     </div>
   </div>
