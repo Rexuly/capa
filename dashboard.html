@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
+</head>
+<body class="dashboard-body">
+  <div class="sidebar">
+    <h2>🛠 Admin Panel</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Upload Lua</a>
+    <a href="#">Manage Files</a>
+    <a href="#">Settings</a>
+    <a href="index.html">Logout</a>
+  </div>
+
+  <div class="main">
+    <h1>Upload Lua File</h1>
+    <div class="upload-section">
+      <input type="file" id="luaFile" accept=".lua">
+    </div>
+
+    <h2>Preview:</h2>
+    <pre><code id="luaPreview" class="language-lua">-- Lua code will appear here</code></pre>
+    <a id="downloadLink" class="download-btn" href="#" download="uploaded.lua" style="display:none;">Download Uploaded File</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-lua.min.js"></script>
+  <script>
+    const fileInput = document.getElementById('luaFile');
+    const preview = document.getElementById('luaPreview');
+    const downloadLink = document.getElementById('downloadLink');
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file && file.name.endsWith('.lua')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.textContent = e.target.result;
+          Prism.highlightElement(preview);
+
+          const blob = new Blob([e.target.result], { type: 'text/plain' });
+          downloadLink.href = URL.createObjectURL(blob);
+          downloadLink.style.display = 'inline-block';
+        };
+        reader.readAsText(file);
+      } else {
+        preview.textContent = '-- Please upload a valid .lua file';
+        downloadLink.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
