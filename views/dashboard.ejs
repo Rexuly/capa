@@ -1,0 +1,12 @@
+<h2>Welcome, Admin</h2>
+<a href="/logout">Logout</a>
+<form method="POST" action="/upload" enctype="multipart/form-data">
+  <input type="file" name="luaFile" required />
+  <button type="submit">Upload Lua File</button>
+</form>
+<h3>Available Files:</h3>
+<ul>
+  <% files.forEach(file => { %>
+    <li><a href="/download/<%= file %>"><%= file %></a></li>
+  <% }) %>
+</ul>
